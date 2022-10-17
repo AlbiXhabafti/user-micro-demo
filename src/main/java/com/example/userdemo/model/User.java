@@ -19,4 +19,6 @@ public class User {
     private String name;
     @Column
     private String departmentId;
+    @Column
+    private String cityId;
 }

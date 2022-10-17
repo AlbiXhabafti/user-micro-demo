@@ -1,5 +1,6 @@
 package com.example.userdemo.service;
 
+import com.example.userdemo.dto.CityDTO;
 import com.example.userdemo.dto.DepartmentDTO;
 import com.example.userdemo.dto.ResponseDTO;
 import com.example.userdemo.dto.UserDTO;
@@ -33,9 +34,14 @@ public class UserService {
         DepartmentDTO departmentDTO = responseEntity.getBody();
         System.out.println(responseEntity.getStatusCode());
 
+        ResponseEntity<CityDTO>cityDTOResponseEntity = restTemplate.getForEntity("http://localhost:7777/api/city/"+ user.getCityId(), CityDTO.class);
+        CityDTO cityDTO = cityDTOResponseEntity.getBody();
+        System.out.println(cityDTOResponseEntity.getStatusCode());
+
         ResponseDTO responseDTO = new ResponseDTO();
         responseDTO.setUserDTO(userDTO);
         responseDTO.setDepartmentDTO(departmentDTO);
+        responseDTO.setCity(cityDTO);
         return responseDTO;
 
     }
