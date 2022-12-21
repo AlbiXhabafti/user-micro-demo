@@ -4,7 +4,10 @@ import com.example.userdemo.dto.ResponseDTO;
 import com.example.userdemo.model.User;
 import com.example.userdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
 
 @RestController
 @RequestMapping("api/user")
@@ -12,7 +15,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
+    @RolesAllowed("ADMIN")
     public ResponseDTO getUser(@PathVariable("id") Long id){
         return userService.getUser(id);
     }
